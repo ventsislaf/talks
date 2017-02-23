@@ -76,7 +76,7 @@ defmodule TicTacToe.Game do
       |> reset_board()
 
     if empty?(new_state) do
-      {:stop, :normal, new_state}
+      {:stop, :normal, new_state, new_state}
     else
       {:reply, new_state, new_state}
     end
