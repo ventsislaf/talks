@@ -15,4 +15,15 @@ defmodule TicTacToe.GameSupervisor do
     ]
     supervise(children, strategy: :simple_one_for_one)
   end
+
+  def game_process(name) do
+    case TicTacToe.Game.whereis(name) do
+      [{pid, _}] -> 
+        pid
+      _ -> 
+        {:ok, pid} = TicTacToe.GameSupervisor.start_child(name)
+        pid
+    end
+  end
+
 end

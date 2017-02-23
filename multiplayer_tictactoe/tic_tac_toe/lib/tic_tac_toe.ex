@@ -8,7 +8,7 @@ defmodule TicTacToe do
 
     children = [
       supervisor(TicTacToe.GameSupervisor, []),
-      worker(TicTacToe.Registry, [])
+      supervisor(Registry, [:unique, Registry.TicTacToe])
     ]
 
     opts = [strategy: :one_for_one, name: TicTacToe.Supervisor]
