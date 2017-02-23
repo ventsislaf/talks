@@ -36,12 +36,10 @@ defmodule TicTacToe.Game do
   end
 
   def whereis(name) do
-    # :gproc.whereis_name({:n, :l, {:game, name}})
     Registry.lookup(Registry.TicTacToe, name)
   end
 
   defp via_tuple(name) do
-    # {:via, :gproc, {:n, :l, {:game, name}}}
     {:via, Registry, {Registry.TicTacToe, name}}
   end
 
