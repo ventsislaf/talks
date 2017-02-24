@@ -55,12 +55,12 @@ defmodule TicTacToe.Game do
   end
 
   def handle_call({:join, player}, _form, %{x: nil} = state) do
-    new_state = %{state | x: player}
+    new_state = %{state | x: player, finished: false}
     {:reply, {:ok, :x, new_state}, new_state}
   end
 
   def handle_call({:join, player}, _form, %{o: nil} = state) do
-    new_state = %{state | o: player}
+    new_state = %{state | o: player, finished: false}
     {:reply, {:ok, :o, new_state}, new_state}
   end
 
