@@ -10,6 +10,6 @@
 - [x] error message from original repo: [link](https://github.com/ventsislaf/talks/issues/1).
 - [x] bug from original repo: when one game is finished, no player clicks the new game button, then a player logs out and another player joins the previous game, the game is stuck.
 
-### what I aim at
-- [ ] replace js by elm
+### what I aim at: [repo](https://github.com/cjen07/gobblet)
+- [x] replace js by elm 
 - [ ] extend tictictoe to gobblet
