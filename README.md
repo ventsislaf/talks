@@ -12,4 +12,4 @@
 
 ### what I aim at: [repo](https://github.com/cjen07/gobblet)
 - [x] replace js by elm 
-- [ ] extend tictictoe to gobblet
+- [x] extend tictictoe to [gobblet](https://github.com/cjen07/gobblet-gobblers)
