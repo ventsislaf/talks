@@ -4,7 +4,7 @@ defmodule TicTacToe.Mixfile do
   def project do
     [app: :tic_tac_toe,
      version: "0.1.0",
-     elixir: "~> 1.3",
+     elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]
@@ -13,11 +13,10 @@ defmodule TicTacToe.Mixfile do
   # Configuration for the OTP application
   #
   # Type "mix help compile.app" for more information
+
   def application do
-    [
-      applications: [:logger, :gproc],
-      mod: {TicTacToe, []}
-   ]
+    [mod: {TicTacToe, []},
+    extra_applications: [:logger]]
   end
 
   # Dependencies can be Hex packages:
@@ -30,8 +29,6 @@ defmodule TicTacToe.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [
-      {:gproc, "0.5.0"}
-    ]
+    []
   end
 end

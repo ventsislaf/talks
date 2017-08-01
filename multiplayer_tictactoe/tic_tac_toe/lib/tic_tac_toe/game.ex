@@ -36,11 +36,11 @@ defmodule TicTacToe.Game do
   end
 
   def whereis(name) do
-    :gproc.whereis_name({:n, :l, {:game, name}})
+    Registry.lookup(Registry.TicTacToe, name)
   end
 
   defp via_tuple(name) do
-    {:via, :gproc, {:n, :l, {:game, name}}}
+    {:via, Registry, {Registry.TicTacToe, name}}
   end
 
   def init(_) do
@@ -55,12 +55,12 @@ defmodule TicTacToe.Game do
   end
 
   def handle_call({:join, player}, _form, %{x: nil} = state) do
-    new_state = %{state | x: player}
+    new_state = %{state | x: player, finished: false}
     {:reply, {:ok, :x, new_state}, new_state}
   end
 
   def handle_call({:join, player}, _form, %{o: nil} = state) do
-    new_state = %{state | o: player}
+    new_state = %{state | o: player, finished: false}
     {:reply, {:ok, :o, new_state}, new_state}
   end
 
@@ -76,7 +76,7 @@ defmodule TicTacToe.Game do
       |> reset_board()
 
     if empty?(new_state) do
-      {:stop, :normal, new_state}
+      {:stop, :normal, new_state, new_state}
     else
       {:reply, new_state, new_state}
     end
