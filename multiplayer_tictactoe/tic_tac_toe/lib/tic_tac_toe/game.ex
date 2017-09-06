@@ -24,7 +24,7 @@ defmodule TicTacToe.Game do
   end
 
   def leave(game, symbol) do
-    GenServer.call(game, {:leave, symbol})
+    GenServer.cast(game, {:leave, symbol})
   end
 
   def put(game, symbol, pos) do
@@ -68,20 +68,6 @@ defmodule TicTacToe.Game do
     {:reply, :error, state}
   end
 
-  def handle_call({:leave, symbol}, _from, state) do
-    new_state =
-      state
-      |> remove_player(symbol)
-      |> reset_score()
-      |> reset_board()
-
-    if empty?(new_state) do
-      {:stop, :normal, new_state}
-    else
-      {:reply, new_state, new_state}
-    end
-  end
-
   def handle_call({:put, _symbol, _pos}, _from, %{finished: true} = state) do
     {:reply, :finished, state}
   end
@@ -108,6 +94,20 @@ defmodule TicTacToe.Game do
 
   def handle_call({:put, _symbol, _position}, _form, state) do
     {:reply, :cheat, state}
+  end
+
+  def handle_cast({:leave, symbol}, state) do
+    new_state =
+      state
+      |> remove_player(symbol)
+      |> reset_score()
+      |> reset_board()
+
+    if empty?(new_state) do
+      {:stop, :normal, new_state}
+    else
+      {:noreply, new_state}
+    end
   end
 
   defp finish_game(state, symbol) do
